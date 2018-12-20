@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# clusterExec.py -m ii-k8s-worker{01..04} -- 'sudo mkdir /mnt/minio1 /mnt/minio2'
-# clusterExec.py -m perf-k8s-worker{05..08} -- 'sudo mkdir /mnt/minio1 /mnt/minio2'
+# clusterExec.py -m ii-k8s-worker{01..02} -- 'sudo mkdir -p /mnt/minio1 /mnt/minio2 /mnt/minio3 /mnt/minio4'
+# clusterExec.py -m perf-k8s-worker{05..08} -- 'sudo mkdir -p /mnt/minio1 /mnt/minio2'
 
 if [ "`whoami`" != "root" ]; then
     echo "ERROR: you must be root to run this script!"
