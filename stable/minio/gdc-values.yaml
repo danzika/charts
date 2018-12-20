@@ -41,7 +41,7 @@ existingSecret: ""
 accessKey: "vertica_eon_k1234567"
 secretKey: "vertica_eon_k1234567_secret1234567890123"
 configPath: "/root/.minio/"
-mountPath: "/mnt/minio1"
+mountPath: "/data"
 replicas: 4
 
 ## TLS Settings for Minio
