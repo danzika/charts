@@ -1,5 +1,5 @@
 ---
-# 8 volumes on 4 worker nodes
+# 8 volumes on 2 worker nodes
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -47,52 +47,6 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: minio-local-worker03-pv1
-spec:
-  capacity:
-    storage: 200Gi
-  accessModes:
-  - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: local-storage
-  local:
-    path: /mnt/minio1
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: kubernetes.io/hostname
-          operator: In
-          values:
-          - ii-k8s-worker03.int.na.intgdc.com
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: minio-local-worker04-pv1
-spec:
-  capacity:
-    storage: 200Gi
-  accessModes:
-  - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: local-storage
-  local:
-    path: /mnt/minio1
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: kubernetes.io/hostname
-          operator: In
-          values:
-          - ii-k8s-worker04.int.na.intgdc.com
----
-
-
-apiVersion: v1
-kind: PersistentVolume
-metadata:
   name: minio-local-worker01-pv2
 spec:
   capacity:
@@ -134,10 +88,12 @@ spec:
           values:
           - ii-k8s-worker02.int.na.intgdc.com
 ---
+
+
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: minio-local-worker03-pv2
+  name: minio-local-worker01-pv3
 spec:
   capacity:
     storage: 200Gi
@@ -146,7 +102,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
-    path: /mnt/minio2
+    path: /mnt/minio3
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -154,12 +110,12 @@ spec:
         - key: kubernetes.io/hostname
           operator: In
           values:
-          - ii-k8s-worker03.int.na.intgdc.com
+          - ii-k8s-worker01.int.na.intgdc.com
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: minio-local-worker04-pv2
+  name: minio-local-worker02-pv3
 spec:
   capacity:
     storage: 200Gi
@@ -168,7 +124,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
-    path: /mnt/minio2
+    path: /mnt/minio3
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -176,5 +132,49 @@ spec:
         - key: kubernetes.io/hostname
           operator: In
           values:
-          - ii-k8s-worker04.int.na.intgdc.com
+          - ii-k8s-worker02.int.na.intgdc.com
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: minio-local-worker01-pv4
+spec:
+  capacity:
+    storage: 200Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /mnt/minio4
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - ii-k8s-worker01.int.na.intgdc.com
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: minio-local-worker02-pv4
+spec:
+  capacity:
+    storage: 200Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /mnt/minio4
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - ii-k8s-worker02.int.na.intgdc.com
 ---
