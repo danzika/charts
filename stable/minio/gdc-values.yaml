@@ -1,7 +1,7 @@
 ## Set default image, imageTag, and imagePullPolicy. mode is used to indicate the
 ##
 image:
-  repository: harbor.intgdc.com/minio/minio
+  repository: harbor.intgdc.com/3rdparty/minio/minio
   tag: RELEASE.2018-12-13T02-04-19Z
   pullPolicy: IfNotPresent
 
@@ -9,7 +9,7 @@ image:
 ## client used to create a default bucket).
 ##
 mcImage:
-  repository: harbor.intgdc.com/minio/mc
+  repository: harbor.intgdc.com/3rdparty/minio/mc
   tag: RELEASE.2018-12-19T22-58-03Z
   pullPolicy: IfNotPresent
 
