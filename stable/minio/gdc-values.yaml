@@ -89,7 +89,7 @@ persistence:
 service:
   type: LoadBalancer
   clusterIP: ~
-  # port: 9000
+  port: 9000
   nodePort: 31311
   # externalIPs:
   #   - externalIp1
