@@ -87,7 +87,8 @@ persistence:
 ##
 
 service:
-  type: LoadBalancer
+  # type: LoadBalancer
+  type: NodePort
   clusterIP: ~
   port: 9000
   nodePort: 32080
