@@ -14,6 +14,9 @@ helm install stable/minio/ --name minio-cluster-1 --set persistence.size=200Gi -
 # Or the same size, if there is only one minio node per worker
 helm install stable/minio/ --name minio-cluster-2 --set persistence.size=200Gi -f stable/minio/gdc-values.yaml
 
+# Temporary, original Ingress does expose random port
+kubectl create -f stable/minio/temp_ingress_nginx.yaml
+
 #####################################
 # Purge
 helm del --purge minio-cluster-1

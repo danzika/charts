@@ -89,5 +89,5 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: minio
+          serviceName: minio-cluster-1
           servicePort: 9000
