@@ -1,15 +1,12 @@
 #!/usr/bin/env bash
 
-# clusterExec.py -m ii-k8s-worker{01..02} -- 'sudo mkdir -p /mnt/minio1 /mnt/minio2 /mnt/minio3 /mnt/minio4'
-# clusterExec.py -m perf-k8s-worker{05..08} -- 'sudo mkdir -p /mnt/minio1 /mnt/minio2'
+ssh mgmt-develop
+clusterExec.py -m ii-k8s-worker{01..02} -- 'sudo mkdir -p /mnt/minio1 /mnt/minio2 /mnt/minio3 /mnt/minio4'
 
-if [ "`whoami`" != "root" ]; then
-    echo "ERROR: you must be root to run this script!"
-    exit 1
-fi
+ssh ii-k8s-master01
+sudo -i
 
 kubectl create -f stable/minio/gdc-pv-ii.yaml
-# kubectl create -f stable/minio/gdc-pv-perf.yaml
 
 # Override values using cmd arguments, e.g. --set persistence.size=100Gi
 helm install stable/minio/ --name minio-cluster-1 -f stable/minio/gdc-values.yaml
@@ -29,5 +26,4 @@ kubectl delete pvc export-minio-cluster-4-2
 kubectl delete pvc export-minio-cluster-5-3
 
 kubectl delete -f stable/minio/gdc-pv-ii.yaml
-# kubectl delete -f stable/minio/gdc-pv-perf.yaml
 

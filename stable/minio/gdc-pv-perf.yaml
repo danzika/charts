@@ -96,7 +96,7 @@ metadata:
   name: minio-local-worker05-pv2
 spec:
   capacity:
-    storage: 200Gi
+    storage: 201Gi
   accessModes:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
@@ -118,7 +118,7 @@ metadata:
   name: minio-local-worker06-pv2
 spec:
   capacity:
-    storage: 200Gi
+    storage: 201Gi
   accessModes:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
@@ -140,7 +140,7 @@ metadata:
   name: minio-local-worker07-pv2
 spec:
   capacity:
-    storage: 200Gi
+    storage: 201Gi
   accessModes:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
@@ -162,7 +162,7 @@ metadata:
   name: minio-local-worker08-pv2
 spec:
   capacity:
-    storage: 200Gi
+    storage: 201Gi
   accessModes:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
