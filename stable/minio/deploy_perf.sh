@@ -5,12 +5,12 @@ clusterExec.py -m perf-k8s-worker{01..08} -- 'sudo mkdir -p /mnt/minio1 /mnt/min
 ssh perf-k8s-master01
 sudo -i
 
-kubectl create -f stable/minio/gdc-pv-perf.yaml
+# kubectl create -f stable/minio/gdc-pv-perf.yaml
 kubectl create -f stable/minio/gdc-pv-perf-v2.yaml
 
 # Override values using cmd arguments, e.g. --set persistence.size=100Gi
 helm install stable/minio/ --name minio-cluster-1 --set persistence.size=200Gi -f stable/minio/gdc-values.yaml
-helm install stable/minio/ --name minio-cluster-2 --set persistence.size=201Gi -f stable/minio/gdc-values.yaml
+#helm install stable/minio/ --name minio-cluster-2 --set persistence.size=201Gi -f stable/minio/gdc-values.yaml
 # Or the same size, if there is only one minio node per worker
 helm install stable/minio/ --name minio-cluster-2 --set persistence.size=200Gi -f stable/minio/gdc-values.yaml
 
@@ -28,6 +28,6 @@ kubectl delete pvc export-minio-cluster-2-1
 kubectl delete pvc export-minio-cluster-2-2
 kubectl delete pvc export-minio-cluster-2-3
 
-kubectl delete -f stable/minio/gdc-pv-perf.yaml
+#kubectl delete -f stable/minio/gdc-pv-perf.yaml
 kubectl create -f stable/minio/gdc-pv-perf-v2.yaml
 
