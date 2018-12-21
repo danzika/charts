@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-clusterExec.py -m perf-k8s-worker{05..08} -- 'sudo mkdir -p /mnt/minio1 /mnt/minio2'
+clusterExec.py -m perf-k8s-worker{01..08} -- 'sudo mkdir -p /mnt/minio1 /mnt/minio2'
 
 ssh perf-k8s-master01
 sudo -i
