@@ -9,13 +9,16 @@ sudo -i
 kubectl create -f stable/minio/gdc-pv-perf-v2.yaml
 
 # Override values using cmd arguments, e.g. --set persistence.size=100Gi
-helm install stable/minio/ --name minio-cluster-1 --set persistence.size=200Gi -f stable/minio/gdc-values.yaml
-#helm install stable/minio/ --name minio-cluster-2 --set persistence.size=201Gi -f stable/minio/gdc-values.yaml
-# Or the same size, if there is only one minio node per worker
-helm install stable/minio/ --name minio-cluster-2 --set persistence.size=200Gi -f stable/minio/gdc-values.yaml
+helm install stable/minio/ --name minio-cluster-1 \
+  --set service.nodePort=32080 \
+  -f stable/minio/gdc-values-perf.yaml
+
+helm install stable/minio/ --name minio-cluster-2 \
+  --set service.nodePort=32081 \
+  -f stable/minio/gdc-values-perf.yaml
 
 # Upgrade
-helm upgrade stable/minio/ --name minio-cluster-1 --set persistence.size=200Gi -f stable/minio/gdc-values.yaml
+# helm upgrade stable/minio/ --name minio-cluster-1 --set persistence.size=200Gi -f stable/minio/gdc-values-perf.yaml
 
 
 # Temporary, original Ingress does expose random port
