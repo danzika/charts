@@ -13,6 +13,12 @@ helm install stable/minio/ --name minio-cluster-1 \
   --set service.nodePort=32080 \
   -f stable/minio/gdc-values-perf.yaml
 
+helm install stable/minio/ --name minio-cluster-1 \
+  --set service.nodePort=32080 \
+  --set environment.MINIO_ETCD_ENDPOINTS=http://perf-etcd01:2379,http://perf-etcd02:2379 \
+  --set environment.MINIO_DOMAIN=minio.k8s.gdc.com
+  -f stable/minio/gdc-values-perf.yaml
+
 helm install stable/minio/ --name minio-cluster-2 \
   --set service.nodePort=32081 \
   -f stable/minio/gdc-values-perf.yaml
