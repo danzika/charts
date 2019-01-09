@@ -38,6 +38,5 @@ kubectl delete pvc export-minio-cluster-2-1
 kubectl delete pvc export-minio-cluster-2-2
 kubectl delete pvc export-minio-cluster-2-3
 
-#kubectl delete -f stable/minio/gdc-pv-perf.yaml
-kubectl create -f stable/minio/gdc-pv-perf-v2.yaml
+kubectl delete -f stable/minio/gdc-pv-perf-v2.yaml
 
