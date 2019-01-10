@@ -207,9 +207,9 @@ environment:
   # MINIO_SSE_VAULT_APPROLE_SECRET: ""
   # MINIO_SSE_VAULT_KEY_NAME: ""
   ## Minio Federation settings, refer: https://docs.minio.io/docs/minio-federation-quickstart-guide.html
-  #MINIO_ETCD_ENDPOINTS: "http://perf-etcd01:2379,http://perf-etcd02:2379"
+  MINIO_ETCD_ENDPOINTS: "http://perf-k8s-master01.int.na.prodgdc.com:2379"
   # MINIO_PUBLIC_IPS: ""
-  #MINIO_DOMAIN: "minio.k8s.gdc.com"
+  MINIO_DOMAIN: "minio.k8s.gdc.com"
   ## Add other environment variables relevant to Minio server here. These values will be added to the container(s) as this Chart is deployed
 
 ## https://docs.minio.io/docs/minio-bucket-notification-guide
