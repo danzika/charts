@@ -46,3 +46,5 @@ kubectl delete pvc export-minio-cluster-2-3
 
 kubectl delete -f stable/minio/gdc-pv-perf-v2.yaml
 
+clusterExec.py -m perf-k8s-worker{01..08} -- 'sudo rm -rf /mnt/minio1 /mnt/minio2'
+# clusterExec.py -m perf-k8s-worker{01..08} -- 'sudo ls /mnt/minio1/ /mnt/minio2/'
