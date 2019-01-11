@@ -87,7 +87,11 @@ spec:
   - host: minio.k8s.gdc.com
     http:
       paths:
-      - path: /
+      - path: /bucket/vertica09
         backend:
           serviceName: minio-cluster-1
+          servicePort: 9000
+      - path: /bucket/vertica10
+        backend:
+          serviceName: minio-cluster-2
           servicePort: 9000

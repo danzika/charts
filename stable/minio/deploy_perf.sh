@@ -1,50 +1,49 @@
 #!/usr/bin/env bash
 
-clusterExec.py -m perf-k8s-worker{01..08} -- 'sudo mkdir -p /mnt/minio1 /mnt/minio2'
+ssh mgmt-performance
+
+clusterExec.py -m perf-k8s-worker{01..08} -- 'sudo mkdir -p /mnt/minio1'
 
 ssh perf-k8s-master01
 sudo -i
 
-# kubectl create -f stable/minio/gdc-pv-perf.yaml
-kubectl create -f stable/minio/gdc-pv-perf-v2.yaml
+kubectl create -f stable/minio/gdc-pv-perf.yaml
 
-# Override values using cmd arguments, e.g. --set persistence.size=100Gi
+###############################################################3
+# Cluster 1
+###############################################################3
+
+# Without federation
 helm install stable/minio/ --name minio-cluster-1 \
   --set service.nodePort=32080 \
-  -f stable/minio/gdc-values-perf.yaml
+  -f stable/minio/gdc-values.yaml
 
+# With federation
 helm install stable/minio/ --name minio-cluster-1 \
   --set service.nodePort=32080 \
-  --set environment.MINIO_ETCD_ENDPOINTS=http://perf-etcd01:2379,http://perf-etcd02:2379 \
+  --set environment.MINIO_ETCD_ENDPOINTS=http://perf-k8s-master01.int.na.prodgdc.com:2379 \
   --set environment.MINIO_DOMAIN=minio.k8s.gdc.com
-  -f stable/minio/gdc-values-perf.yaml
+  -f stable/minio/gdc-values.yaml
 
+###############################################################3
+# Cluster 2
+###############################################################3
+
+# Without federation
 helm install stable/minio/ --name minio-cluster-2 \
   --set service.nodePort=32081 \
-  -f stable/minio/gdc-values-perf.yaml
+  -f stable/minio/gdc-values.yaml
 
-# Upgrade
-# helm upgrade stable/minio/ --name minio-cluster-1 --set persistence.size=200Gi -f stable/minio/gdc-values-perf.yaml
+# With federation
+helm install stable/minio/ --name minio-cluster-2 \
+  --set service.nodePort=32081 \
+  --set environment.MINIO_ETCD_ENDPOINTS=http://perf-k8s-master01.int.na.prodgdc.com:2379 \
+  --set environment.MINIO_DOMAIN=minio.k8s.gdc.com
+  -f stable/minio/gdc-values.yaml
 
 
-# Temporary, original Ingress does expose random port
+# TODO - deploy Ingress with nginx controller like in Hackaton
+# Use same port for all Minio clusters
+# Consider to (do not) use federation mode
+
 kubectl create -f stable/minio/temp_ingress_nginx.yaml
-
-#####################################
-# Purge
-helm del --purge minio-cluster-1
-helm del --purge minio-cluster-2
-
-kubectl delete pvc export-minio-cluster-1-0
-kubectl delete pvc export-minio-cluster-1-1
-kubectl delete pvc export-minio-cluster-1-2
-kubectl delete pvc export-minio-cluster-1-3
-kubectl delete pvc export-minio-cluster-2-0
-kubectl delete pvc export-minio-cluster-2-1
-kubectl delete pvc export-minio-cluster-2-2
-kubectl delete pvc export-minio-cluster-2-3
-
-kubectl delete -f stable/minio/gdc-pv-perf-v2.yaml
-
-clusterExec.py -m perf-k8s-worker{01..08} -- 'sudo rm -rf /mnt/minio1 /mnt/minio2'
-# clusterExec.py -m perf-k8s-worker{01..08} -- 'sudo ls /mnt/minio1/ /mnt/minio2/'
