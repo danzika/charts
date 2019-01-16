@@ -8,6 +8,9 @@ sudo -i
 helm del --purge minio-cluster-1
 helm del --purge minio-cluster-2
 
+# If corrupted
+kubectl delete pods,services,secrets,configmaps,persistentvolumeclaims,statefulsets.apps -l release=minio-cluster-1
+
 kubectl delete pvc export-minio-cluster-1-0
 kubectl delete pvc export-minio-cluster-1-1
 kubectl delete pvc export-minio-cluster-1-2

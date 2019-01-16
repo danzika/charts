@@ -18,6 +18,11 @@ helm install stable/minio/ --name minio-cluster-1 \
   --set service.nodePort=32080 \
   -f stable/minio-gdc/gdc-values.yaml
 
+# Upgrade example
+helm upgrade minio-cluster-1 stable/minio/ \
+  --set service.nodePort=32080 \
+  -f stable/minio-gdc/gdc-values.yaml
+
 # With federation
 helm install stable/minio/ --name minio-cluster-1 \
   --set service.nodePort=32080 \
