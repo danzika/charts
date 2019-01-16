@@ -22,7 +22,8 @@ helm install stable/minio/ --name minio-cluster-1 \
 helm install stable/minio/ --name minio-cluster-1 \
   --set service.nodePort=32080 \
   --set environment.MINIO_ETCD_ENDPOINTS=http://perf-k8s-master01.int.na.prodgdc.com:2379 \
-  --set environment.MINIO_DOMAIN=minio.k8s.gdc.com
+  --set environment.MINIO_DOMAIN=minio.k8s.gdc.com \
+  --set environment.MINIO_PUBLIC_IPS=minio-cluster-1 \
   -f stable/minio/gdc-values.yaml
 
 ###############################################################3
