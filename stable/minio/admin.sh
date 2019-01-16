@@ -16,6 +16,13 @@ chmod 775 mc
 export ETCDCTL_API=3
 etcdctl --endpoints perf-k8s-master01.int.na.prodgdc.com:2379 get --prefix /skydns
 
+# Delete key
+etcdctl --endpoints perf-k8s-master01.int.na.prodgdc.com:2379 \
+  del /skydns/com/gdc/k8s/minio/test/172.19.32.4
+etcdctl --endpoints perf-k8s-master01.int.na.prodgdc.com:2379 \
+  del /skydns/com/gdc/k8s/minio/test2/172.17.48.8
+
+
 # TODO - think about to modify IP to redirect bucket to different Minio cluster
 # would have to be done in sync with "mc -w mirror" operation
 etcdctl --endpoints perf-k8s-master01.int.na.prodgdc.com:2379 \
