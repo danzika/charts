@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+export NAMESPACE=minio
+
+helm list --namespace ${NAMESPACE}
+kubectl get all --namespace ${NAMESPACE} -l release=minio-cluster-1
+
 wget https://dl.minio.io/client/mc/release/linux-amd64/mc
 chmod 775 mc
 ./mc config host add minio-cluster-1 http://perf-k8s-worker01.int.na.prodgdc.com:32080 \
