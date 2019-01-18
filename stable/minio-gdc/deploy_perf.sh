@@ -8,7 +8,7 @@ export CLUSTER_NAME="minio-cluster-1"
 export PORT=32080
 
 export CLUSTER_NAME="minio-cluster-2"
-export PORT=32081
+export PORT=9000
 
 # Without federation, NodePort
 helm install ../minio/ --name ${CLUSTER_NAME} --namespace ${NAMESPACE} -f gdc-values.yaml \
@@ -19,7 +19,12 @@ helm install ../minio/ --name ${CLUSTER_NAME} --namespace ${NAMESPACE} -f gdc-va
   --set service.type=ClusterIP --set service.port=${PORT} \
   --set ingress.enabled=true --set ingress.path=/
 
-# TODO - specify path rule for each Vertica?
+# Upgrade example
+helm upgrade ${CLUSTER_NAME} ../minio/ --namespace ${NAMESPACE} -f gdc-values.yaml \
+  --set service.type=ClusterIP --set service.port=${PORT} \
+  --set ingress.enabled=true --set ingress.path=/
+
+# TODO - how to specify path rule for each Vertica?
 
 # With federation, NodePort
 helm install ../minio/ --name ${CLUSTER_NAME} --namespace ${NAMESPACE} -f gdc-values.yaml \
@@ -28,12 +33,6 @@ helm install ../minio/ --name ${CLUSTER_NAME} --namespace ${NAMESPACE} -f gdc-va
   --set environment.MINIO_DOMAIN=minio.k8s.gdc.com \
   --set environment.MINIO_PUBLIC_IPS=minio-cluster-1
 
-# Upgrade example
-helm upgrade ${CLUSTER_NAME} ../minio/ --namespace ${NAMESPACE} -f gdc-values.yaml \
-  --set service.nodePort=${PORT} \
-  --set environment.MINIO_ETCD_ENDPOINTS=http://perf-k8s-master01.int.na.prodgdc.com:2379 \
-  --set environment.MINIO_DOMAIN=minio.k8s.gdc.com \
-  --set environment.MINIO_PUBLIC_IPS=minio-cluster-1
 
 ########################################################################
 # TODO - deploy Ingress with custom nginx controller like in Hackaton
