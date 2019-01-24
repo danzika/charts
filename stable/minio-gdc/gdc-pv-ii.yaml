@@ -4,6 +4,8 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: minio-local-worker01-pv1
+  labels:
+    app: minio
 spec:
   capacity:
     storage: 200Gi
@@ -26,6 +28,8 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: minio-local-worker02-pv1
+  labels:
+    app: minio
 spec:
   capacity:
     storage: 200Gi
@@ -48,6 +52,8 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: minio-local-worker01-pv2
+  labels:
+    app: minio
 spec:
   capacity:
     storage: 200Gi
@@ -70,6 +76,8 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: minio-local-worker02-pv2
+  labels:
+    app: minio
 spec:
   capacity:
     storage: 200Gi

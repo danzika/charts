@@ -1,22 +1,21 @@
 #!/usr/bin/env bash
 
-ssh mgmt-performance
-
-ssh perf-k8s-master01
-sudo -i
+export NAMESPACE=minio
 
 helm del --purge minio-cluster-1
-helm del --purge minio-cluster-2
 
-kubectl delete pvc export-minio-cluster-1-0
-kubectl delete pvc export-minio-cluster-1-1
-kubectl delete pvc export-minio-cluster-1-2
-kubectl delete pvc export-minio-cluster-1-3
-kubectl delete pvc export-minio-cluster-2-0
-kubectl delete pvc export-minio-cluster-3-1
-kubectl delete pvc export-minio-cluster-4-2
-kubectl delete pvc export-minio-cluster-5-3
+# If corrupted
+helm list --namespace ${NAMESPACE}
+kubectl get all --namespace ${NAMESPACE} -l release=minio-cluster-1
 
-kubectl delete -f stable/minio/gdc-pv-ii.yaml
+kubectl delete pods,services,secrets,configmaps,persistentvolumeclaims,statefulsets.apps --namespace ${NAMESPACE} -l release=minio-cluster-1
+kubectl delete persistentvolumes --namespace ${NAMESPACE} -l app=minio
 
-clusterExec.py -m ii-k8s-worker{01..02} -- 'sudo rm -rf /mnt/minio1 /mnt/minio2 /mnt/minio3 /mnt/minio4'
+kubectl delete pvc export-minio-cluster-1-0 --namespace ${NAMESPACE}
+kubectl delete pvc export-minio-cluster-1-1 --namespace ${NAMESPACE}
+kubectl delete pvc export-minio-cluster-1-2 --namespace ${NAMESPACE}
+kubectl delete pvc export-minio-cluster-1-3 --namespace ${NAMESPACE}
+
+kubectl delete -f gdc-pv-ii.yaml --namespace ${NAMESPACE}
+
+clusterExec.py -m ii-k8s-worker{01..02} -- 'sudo rm -rf /mnt/minio1 /mnt/minio2'

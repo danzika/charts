@@ -145,9 +145,9 @@ resources:
 ## Create a bucket after minio install
 ##
 defaultBucket:
-  enabled: false
+  enabled: true
   ## If enabled, must be a string with length > 0
-  name: bucket
+  name: vertica
   ## Can be one of none|download|upload|public
   policy: none
   ## Purge if bucket exists already
