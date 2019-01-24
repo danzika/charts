@@ -4,7 +4,23 @@ GoodData specifics
 This is fork of upstream helm charts.
 You can find here the following GoodData customizations.
 
-Prepare env, e.g. PERF
+Prepare II env
+----------------------
+
+```bash
+ssh mgmt-dev
+
+clusterExec.py -m ii-k8s-worker{01..02} -- 'sudo mkdir -p /mnt/minio1 /mnt/minio2'
+
+ssh ii-k8s-master01
+sudo -i
+
+git clone git@github.com:jaceksan/charts.git
+
+cd charts/stable/minio-gdc
+```
+
+Prepare PERF env
 ----------------------
 
 ```bash

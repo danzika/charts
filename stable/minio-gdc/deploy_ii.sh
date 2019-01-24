@@ -1,14 +1,12 @@
 #!/usr/bin/env bash
 
-ssh mgmt-develop
-clusterExec.py -m ii-k8s-worker{01..02} -- 'sudo mkdir -p /mnt/minio1 /mnt/minio2 /mnt/minio3 /mnt/minio4'
+export NAMESPACE=minio
 
-ssh ii-k8s-master01
-sudo -i
+kubectl create --namespace ${NAMESPACE} -f gdc-pv-ii.yaml
 
-kubectl create -f stable/minio/gdc-pv-ii.yaml
+export CLUSTER_NAME="minio-cluster-1"
+export PORT=32080
 
-# Override values using cmd arguments, e.g. --set persistence.size=100Gi
-helm install stable/minio/ --name minio-cluster-1 -f stable/minio/gdc-values.yaml
-helm install stable/minio/ --name minio-cluster-2 -f stable/minio/gdc-values.yaml
-
+# Without federation, NodePort
+helm install ../minio/ --name ${CLUSTER_NAME} --namespace ${NAMESPACE} -f gdc-values.yaml \
+  --set service.type=NodePort --set service.nodePort=${PORT}

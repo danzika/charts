@@ -9,8 +9,13 @@ wget https://dl.minio.io/client/mc/release/linux-amd64/mc
 chmod 775 mc
 ./mc config host add minio-cluster-1 http://perf-k8s-worker01.int.na.prodgdc.com:32080 \
   vertica_eon_k1234567 vertica_eon_k1234567_secret1234567890123 S3v4
-./mc config host add minio-cluster-2 http://perf-k8s-worker04.int.na.prodgdc.com:32081 \
+
+./mc config host add minio-cluster-2 http://perf-k8s-worker07.int.na.prodgdc.com:32081 \
   vertica_eon_k1234567 vertica_eon_k1234567_secret1234567890123 S3v4
+
+./mc config host add minio-cluster-2 http://minio.k8s.gdc.com \
+  vertica_eon_k1234567 vertica_eon_k1234567_secret1234567890123 S3v4
+
 ./mc admin info minio-cluster-1
 ./mc ls minio-cluster-1
 
