@@ -22,6 +22,9 @@ chmod 775 mc
 ./mc mb minio-cluster-2/test2
 ./mc mirror minio-cluster-1/test minio-cluster-2/test2
 
+./mc admin heal --recursive --dry-run minio-cluster-1/vertica
+./mc admin heal --recursive minio-cluster-1/vertica
+
 # Explore / modify ETCD records
 export ETCDCTL_API=3
 etcdctl --endpoints perf-k8s-master01.int.na.prodgdc.com:2379 get --prefix /skydns
