@@ -22,6 +22,9 @@ chmod 775 mc
 ./mc mb minio-cluster-2/test2
 ./mc mirror minio-cluster-1/test minio-cluster-2/test2
 
+# Heal certain pod
+./mc config host add minio-cluster-1 http://perf-k8s-worker01.int.na.prodgdc.com:32080 \
+  vertica_eon_k1234567 vertica_eon_k1234567_secret1234567890123 S3v4
 ./mc admin heal --recursive --dry-run minio-cluster-1/vertica
 ./mc admin heal --recursive minio-cluster-1/vertica
 
