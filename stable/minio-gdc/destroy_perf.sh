@@ -2,8 +2,8 @@
 
 export NAMESPACE=minio
 
-helm del --purge --namespace ${NAMESPACE} minio-cluster-1
-helm del --purge --namespace ${NAMESPACE} minio-cluster-2
+helm del --purge minio-cluster-1
+helm del --purge minio-cluster-2
 
 # If corrupted
 helm list --namespace ${NAMESPACE}

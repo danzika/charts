@@ -2,30 +2,30 @@
 
 export NAMESPACE=minio
 
-export CLUSTER_NAME="minio-cluster-1"
-export PORT=32080
+export NODE_PORT=32080
+export SERVICE_PORT=32080
 
+export CLUSTER_NAME="minio-cluster-1"
 export CLUSTER_NAME="minio-cluster-2"
-export PORT=9000
 
 kubectl create --namespace ${NAMESPACE} -f gdc-pv-perf.yaml
 
 # Without federation, NodePort
 helm install ../minio/ --name ${CLUSTER_NAME} --namespace ${NAMESPACE} -f gdc-values.yaml \
-  --set service.type=NodePort --set service.nodePort=${PORT}
+  --set service.type=NodePort --set service.nodePort=${NODE_PORT}
 
 # Upgrade example
 helm upgrade ${CLUSTER_NAME} ../minio/ --namespace ${NAMESPACE} -f gdc-values.yaml \
-  --set service.type=NodePort --set service.nodePort=${PORT}
+  --set service.type=NodePort --set service.nodePort=${NODE_PORT}
 
 # Without federation, ingress with default nginx
 helm install ../minio/ --name ${CLUSTER_NAME} --namespace ${NAMESPACE} -f gdc-values.yaml \
-  --set service.type=ClusterIP --set service.port=${PORT} \
+  --set service.type=ClusterIP --set service.port=${SERVICE_PORT} \
   --set ingress.enabled=true --set ingress.path=/
 
 # Upgrade example
 helm upgrade ${CLUSTER_NAME} ../minio/ --namespace ${NAMESPACE} -f gdc-values.yaml \
-  --set service.type=ClusterIP --set service.port=${PORT} \
+  --set service.type=ClusterIP --set service.port=${SERVICE_PORT} \
   --set ingress.enabled=true --set ingress.path=/
 
 # TODO - how to specify path rule for each Vertica?
