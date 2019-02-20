@@ -72,6 +72,19 @@ Other
 - migr_gen_load.py
 -- TODO - implement stress test for bucket migration scenario?
 
+Check from Vertica
+-------------------
+
+```
+ssh hor-dss-v03n01
+sudo -i
+su - vertica
+# NodePort
+aws s3 --endpoint-url http://ii-k8s-worker01.int.na.intgdc.com:32080 ls s3://
+# Ingress
+aws s3 --endpoint-url http://ii-k8s-worker01.int.na.intgdc.com:80 ls s3://
+```
+
 
 Minio
 =====
