@@ -3,20 +3,19 @@
 export NAMESPACE=minio
 
 export NODE_PORT=32080
-export SERVICE_PORT=32080
+export SERVICE_PORT=9000
 
 export CLUSTER_NAME="minio-cluster-1"
 export CLUSTER_NAME="minio-cluster-2"
 
 kubectl create --namespace ${NAMESPACE} -f gdc-pv-perf.yaml
 
-# Without federation, NodePort
-helm install ../minio/ --name ${CLUSTER_NAME} --namespace ${NAMESPACE} -f gdc-values.yaml \
-  --set service.type=NodePort --set service.nodePort=${NODE_PORT}
-
+# Without federation, NodePort - DEPRECATED
+#helm install ../minio/ --name ${CLUSTER_NAME} --namespace ${NAMESPACE} -f gdc-values.yaml \
+#  --set service.type=NodePort --set service.nodePort=${NODE_PORT}
 # Upgrade example
-helm upgrade ${CLUSTER_NAME} ../minio/ --namespace ${NAMESPACE} -f gdc-values.yaml \
-  --set service.type=NodePort --set service.nodePort=${NODE_PORT}
+#helm upgrade ${CLUSTER_NAME} ../minio/ --namespace ${NAMESPACE} -f gdc-values.yaml \
+#  --set service.type=NodePort --set service.nodePort=${NODE_PORT}
 
 # Without federation, ingress with default nginx
 helm install ../minio/ --name ${CLUSTER_NAME} --namespace ${NAMESPACE} -f gdc-values.yaml \

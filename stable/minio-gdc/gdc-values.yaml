@@ -106,7 +106,7 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   path: /
   hosts:
-    - minio.k8s.gdc.com
+    - minio.k8s.gooddata
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
