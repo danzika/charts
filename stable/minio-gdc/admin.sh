@@ -7,7 +7,7 @@ kubectl get all --namespace ${NAMESPACE} -l release=minio-cluster-1
 
 kubectl describe svc minio-cluster-1 --namespace minio | grep Endpoints:
 
-export POD_IP=172.17.128.7
+export POD_IP=172.16.192.8
 export PORT=9000
 
 wget https://dl.minio.io/client/mc/release/linux-amd64/mc
