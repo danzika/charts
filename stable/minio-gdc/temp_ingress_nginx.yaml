@@ -7,7 +7,7 @@ metadata:
     app: nginx-ingress-minio-controller
     kubernetes.io/cluster-service: "true"
   name: nginx-ingress-minio-controller-role
-  namespace: kube-system
+  namespace: minio
 rules:
 - apiGroups:
   - ""
@@ -35,7 +35,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: addon-http-application-routing-nginx-ingress-serviceaccount
-  namespace: kube-system
+  namespace: minio
 ---
 kind: ConfigMap
 apiVersion: v1
