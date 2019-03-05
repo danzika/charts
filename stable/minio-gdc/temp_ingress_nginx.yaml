@@ -58,6 +58,7 @@ spec:
              - --status-port=32444
              - --healthz-port=32445
              - --ssl-passtrough-proxy-port=32446
+             - --default-server-port 32447
           # For the hostNetwork we dedicate ports 32000-32768,
           # since 32768-60999 are the default ephemeral ports.
           ports:
