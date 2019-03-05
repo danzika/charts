@@ -27,7 +27,7 @@ metadata:
     app: addon-http-application-routing-ingress-nginx
     kubernetes.io/cluster-service: "true"
   name: my-addon-http-application-routing-nginx-ingress-role-binding
-  namespace: kube-system
+  namespace: minio
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
