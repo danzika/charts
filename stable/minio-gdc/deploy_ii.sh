@@ -16,6 +16,7 @@ export SERVICE_PORT=9000
 #  --set service.type=NodePort --set service.nodePort=${NODE_PORT}
 
 # Without federation, ingress with default nginx
-helm install ../minio/ --name ${CLUSTER_NAME} --namespace ${NAMESPACE} -f gdc-values.yaml \
+even
+helm upgrade ${CLUSTER_NAME} ../minio/ --namespace ${NAMESPACE} -f gdc-values.yaml \
   --set service.type=ClusterIP --set service.port=${SERVICE_PORT} \
   --set ingress.enabled=true --set ingress.path=/

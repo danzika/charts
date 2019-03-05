@@ -11,8 +11,8 @@ export CLUSTER_NAME="minio-cluster-2"
 kubectl create --namespace ${NAMESPACE} -f gdc-pv-perf.yaml
 
 # Without federation, NodePort - DEPRECATED
-#helm install ../minio/ --name ${CLUSTER_NAME} --namespace ${NAMESPACE} -f gdc-values.yaml \
-#  --set service.type=NodePort --set service.nodePort=${NODE_PORT}
+helm install ../minio/ --name ${CLUSTER_NAME} --namespace ${NAMESPACE} -f gdc-values.yaml \
+  --set service.type=NodePort --set service.nodePort=${NODE_PORT}
 # Upgrade example
 #helm upgrade ${CLUSTER_NAME} ../minio/ --namespace ${NAMESPACE} -f gdc-values.yaml \
 #  --set service.type=NodePort --set service.nodePort=${NODE_PORT}
