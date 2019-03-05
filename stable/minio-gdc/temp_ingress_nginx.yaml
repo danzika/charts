@@ -1,41 +1,32 @@
 ---
+kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
 metadata:
+  name: minio-nginx
   labels:
-    addonmanager.kubernetes.io/mode: Reconcile
-    app: nginx-ingress-minio-controller
-    kubernetes.io/cluster-service: "true"
-  name: nginx-ingress-minio-controller-role
-  namespace: minio
+    app: minio
 rules:
-- apiGroups:
-  - ""
-  resourceNames:
-  - ingress-controller-leader-addon-http-application-routing
-  resources:
-  - configmaps
-  verbs:
-  - get
-  - update
+  - apiGroups: [""]
+    resources: ["nodes", "services"]
+    verbs: ["list"]
+  - apiGroups: ["extensions"]
+    resources: ["ingresses"]
+    verbs: ["list"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
+kind: ClusterRoleBinding
 metadata:
+  name: minio-nginx
   labels:
-    addonmanager.kubernetes.io/mode: Reconcile
-    app: addon-http-application-routing-ingress-nginx
-    kubernetes.io/cluster-service: "true"
-  name: my-addon-http-application-routing-nginx-ingress-role-binding
-  namespace: minio
+    app: minio
 roleRef:
   apiGroup: rbac.authorization.k8s.io
-  kind: Role
-  name: my-addon-http-application-routing-nginx-ingress-role
+  kind: ClusterRole
+  name: minio-nginx
 subjects:
-- kind: ServiceAccount
-  name: addon-http-application-routing-nginx-ingress-serviceaccount
-  namespace: minio
+  - kind: ServiceAccount
+    name: default
+    namespace: minio
 ---
 kind: ConfigMap
 apiVersion: v1
@@ -71,7 +62,7 @@ spec:
         prometheus.io/scrape: 'true'
     spec:
       hostNetwork: true
-      serviceAccountName: nginx-ingress-serviceaccount
+      serviceAccountName: default
       containers:
         - name: nginx-ingress-controller
           image: harbor.intgdc.com/3rdparty/kubernetes-ingress-controller/nginx-ingress-controller:0.15.0
