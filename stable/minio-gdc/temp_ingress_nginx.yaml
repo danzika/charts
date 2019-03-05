@@ -9,13 +9,13 @@ data:
   proxy-body-size: "0"
 metadata:
   name: nginx-gdc-minio-conf
-  namespace: nginx-ingress
+  namespace: minio
 ---
 apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
   name: nginx-ingress-minio-controller
-  namespace: nginx-ingress
+  namespace: minio
 spec:
   updateStrategy:
     type: RollingUpdate
