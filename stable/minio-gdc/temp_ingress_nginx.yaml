@@ -126,10 +126,7 @@ subjects:
 kind: ConfigMap
 apiVersion: v1
 data:
-  disable-ipv6: "true"
-  server-tokens: "false"
   ignore-invalid-headers: "false"
-  proxy-request-buffering: "off"
   proxy-body-size: "0"
 metadata:
   name: nginx-gdc-minio-conf
