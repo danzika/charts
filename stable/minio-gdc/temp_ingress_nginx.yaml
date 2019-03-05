@@ -33,6 +33,7 @@ spec:
         prometheus.io/scrape: 'true'
     spec:
       hostNetwork: true
+      serviceAccountName: nginx-ingress-serviceaccount
       containers:
         - name: nginx-ingress-controller
           image: harbor.intgdc.com/3rdparty/kubernetes-ingress-controller/nginx-ingress-controller:0.15.0
