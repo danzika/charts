@@ -2,27 +2,24 @@
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: minio-nginx
+  name: nginx-ingress-minio
   labels:
-    app: minio
+    k8s-app: nginx-ingress-minio
 rules:
   - apiGroups: [""]
-    resources: ["nodes", "services"]
-    verbs: ["list"]
-  - apiGroups: ["extensions"]
-    resources: ["ingresses"]
-    verbs: ["list"]
+    resources: ["services"]
+    verbs: ["list", "get"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: minio-nginx
+  name: nginx-ingress-minio
   labels:
-    app: minio
+    k8s-app: nginx-ingress-minio
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: minio-nginx
+  name: nginx-ingress-minio
 subjects:
   - kind: ServiceAccount
     name: default
