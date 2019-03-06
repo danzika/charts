@@ -22,5 +22,5 @@ spec:
           servicePort: 9000
       - path: /vertica
         backend:
-          serviceName: minio-cluster-2
+          serviceName: minio-cluster-1
           servicePort: 9000
