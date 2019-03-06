@@ -11,18 +11,6 @@ spec:
   - host: minio.k8s.gooddata
     http:
       paths:
-      - path: /vertica/perf-dss-v04
-        backend:
-          serviceName: minio-cluster-1
-          servicePort: 9000
-      - path: /vertica/perf-dss-v03
-        backend:
-          serviceName: minio-cluster-1
-          servicePort: 9000
-      - path: /vertica
-        backend:
-          serviceName: minio-cluster-2
-          servicePort: 9000
       - path: /
         backend:
           serviceName: minio-cluster-1
