@@ -27,7 +27,7 @@ helm install ../minio/ --name ${CLUSTER_NAME} --namespace ${NAMESPACE} -f gdc-va
   --set service.type=ClusterIP --set service.port=${SERVICE_PORT} \
   --set ingress.enabled=false
 
-# Upgrade example (modify ingress)
+# Upgrade example
 helm upgrade ${CLUSTER_NAME} ../minio/ --namespace ${NAMESPACE} -f gdc-values.yaml \
   --set service.type=ClusterIP --set service.port=${SERVICE_PORT} \
   --set ingress.enabled=true --set ingress.path=/
