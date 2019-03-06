@@ -23,3 +23,7 @@ spec:
         backend:
           serviceName: minio-cluster-2
           servicePort: 9000
+      - path: /
+        backend:
+          serviceName: minio-cluster-1
+          servicePort: 9000
