@@ -2,24 +2,24 @@
 
 export NAMESPACE=minio
 
-helm del --purge minio-cluster-1
-helm del --purge minio-cluster-2
+helm del --purge minio-4node-200g-c01
+helm del --purge minio-4node-200g-c02
 
 # If corrupted
 helm list --namespace ${NAMESPACE}
-kubectl get all --namespace ${NAMESPACE} -l release=minio-cluster-1
+kubectl get all --namespace ${NAMESPACE} -l release=minio-4node-200g-c01
 
-kubectl delete pods,services,secrets,configmaps,persistentvolumeclaims,statefulsets.apps --namespace ${NAMESPACE} -l release=minio-cluster-1
+kubectl delete pods,services,secrets,configmaps,persistentvolumeclaims,statefulsets.apps --namespace ${NAMESPACE} -l release=minio-4node-200g-c01
 kubectl delete persistentvolumes --namespace ${NAMESPACE} -l app=minio
 
-kubectl delete pvc export-minio-cluster-1-0 --namespace ${NAMESPACE}
-kubectl delete pvc export-minio-cluster-1-1 --namespace ${NAMESPACE}
-kubectl delete pvc export-minio-cluster-1-2 --namespace ${NAMESPACE}
-kubectl delete pvc export-minio-cluster-1-3 --namespace ${NAMESPACE}
-kubectl delete pvc export-minio-cluster-2-0 --namespace ${NAMESPACE}
-kubectl delete pvc export-minio-cluster-2-1 --namespace ${NAMESPACE}
-kubectl delete pvc export-minio-cluster-2-2 --namespace ${NAMESPACE}
-kubectl delete pvc export-minio-cluster-2-3 --namespace ${NAMESPACE}
+kubectl delete pvc export-minio-4node-200g-c01-0 --namespace ${NAMESPACE}
+kubectl delete pvc export-minio-4node-200g-c01-1 --namespace ${NAMESPACE}
+kubectl delete pvc export-minio-4node-200g-c01-2 --namespace ${NAMESPACE}
+kubectl delete pvc export-minio-4node-200g-c01-3 --namespace ${NAMESPACE}
+kubectl delete pvc export-minio-4node-200g-c02-0 --namespace ${NAMESPACE}
+kubectl delete pvc export-minio-4node-200g-c02-1 --namespace ${NAMESPACE}
+kubectl delete pvc export-minio-4node-200g-c02-2 --namespace ${NAMESPACE}
+kubectl delete pvc export-minio-4node-200g-c02-3 --namespace ${NAMESPACE}
 
 kubectl delete -f gdc-pv-perf.yaml --namespace ${NAMESPACE}
 

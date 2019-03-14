@@ -6,14 +6,21 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
     nginx.ingress.kubernetes.io/proxy-buffering: "off"
     nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
-  name: minio-cluster-1
+  name: minio-clusters
   namespace: minio
 spec:
   rules:
-  - host: minio.k8s.gooddata
+  - host: perf-dss-v03.minio.k8s.gooddata
     http:
       paths:
       - path: /
         backend:
           serviceName: minio-cluster-1
           servicePort: 9000
+  - host: perf-dss-v04.minio.k8s.gooddata
+    http:
+      paths:
+        - path: /
+          backend:
+            serviceName: minio-cluster-1
+            servicePort: 9000
