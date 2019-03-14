@@ -3,34 +3,34 @@
 export NAMESPACE=minio
 
 helm list --namespace ${NAMESPACE}
-kubectl get all --namespace ${NAMESPACE} -l release=minio-cluster-1
+kubectl get all --namespace ${NAMESPACE} -l release=minio-4node-200g-c01
 
-kubectl describe svc minio-cluster-1 --namespace minio | grep Endpoints:
+kubectl describe svc minio-4node-200g-c01 --namespace minio | grep Endpoints:
 
-export POD_IP=172.16.192.8
+export POD_IP=172.16.192.19
 export POD_IP=172.16.0.5
 export PORT=9000
 
 wget https://dl.minio.io/client/mc/release/linux-amd64/mc
 chmod 775 mc
 
-./mc config host add minio-cluster-1 http://${POD_IP}:${PORT} \
+./mc config host add minio-4node-200g-c01 http://${POD_IP}:${PORT} \
   vertica_eon_k1234567 vertica_eon_k1234567_secret1234567890123 S3v4
 
-./mc config host add minio-cluster-2 http://${POD_IP}:${PORT} \
+./mc config host add minio-4node-200g-c02 http://${POD_IP}:${PORT} \
   vertica_eon_k1234567 vertica_eon_k1234567_secret1234567890123 S3v4
 
-./mc admin info minio-cluster-1
-./mc ls minio-cluster-1
+./mc admin info minio-4node-200g-c01
+./mc ls minio-4node-200g-c01
 
-./mc mb minio-cluster-2/test2
-./mc mirror minio-cluster-1/test minio-cluster-2/test2
+./mc mb minio-4node-200g-c02/test2
+./mc mirror minio-4node-200g-c01/test minio-4node-200g-c02/test2
 
 # Heal certain pod
-./mc config host add minio-cluster-1 http://perf-k8s-worker01.int.na.prodgdc.com:32080 \
+./mc config host add minio-4node-200g-c01 http://perf-k8s-worker01.int.na.prodgdc.com:32080 \
   vertica_eon_k1234567 vertica_eon_k1234567_secret1234567890123 S3v4
-./mc admin heal --recursive --dry-run minio-cluster-1/vertica
-./mc admin heal --recursive minio-cluster-1/vertica
+./mc admin heal --recursive --dry-run minio-4node-200g-c01/vertica
+./mc admin heal --recursive minio-4node-200g-c01/vertica
 
 # Explore / modify ETCD records
 export ETCDCTL_API=3
