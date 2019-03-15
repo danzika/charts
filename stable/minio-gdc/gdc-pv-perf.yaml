@@ -8,7 +8,7 @@ metadata:
     app: minio
 spec:
   capacity:
-    storage: 400Gi
+    storage: 200Gi
   accessModes:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
@@ -32,7 +32,7 @@ metadata:
     app: minio
 spec:
   capacity:
-    storage: 400Gi
+    storage: 200Gi
   accessModes:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
@@ -56,7 +56,7 @@ metadata:
     app: minio
 spec:
   capacity:
-    storage: 400Gi
+    storage: 200Gi
   accessModes:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
@@ -80,7 +80,7 @@ metadata:
     app: minio
 spec:
   capacity:
-    storage: 400Gi
+    storage: 200Gi
   accessModes:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
@@ -104,7 +104,7 @@ metadata:
     app: minio
 spec:
   capacity:
-    storage: 400Gi
+    storage: 200Gi
   accessModes:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
@@ -128,7 +128,7 @@ metadata:
     app: minio
 spec:
   capacity:
-    storage: 400Gi
+    storage: 200Gi
   accessModes:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
@@ -152,7 +152,7 @@ metadata:
     app: minio
 spec:
   capacity:
-    storage: 400Gi
+    storage: 200Gi
   accessModes:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
@@ -176,7 +176,7 @@ metadata:
     app: minio
 spec:
   capacity:
-    storage: 400Gi
+    storage: 200Gi
   accessModes:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
