@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+wget https://dl.minio.io/client/mc/release/linux-amd64/mc
+chmod 775 mc
+
 export NAMESPACE=minio
 
 helm list --namespace ${NAMESPACE}
@@ -7,11 +10,8 @@ kubectl get all --namespace ${NAMESPACE} -l release=minio-4node-200g-c01
 
 kubectl describe svc minio-4node-200g-c01 --namespace minio | grep Endpoints:
 
-export POD_IP=172.16.0.11
+export POD_IP=172.17.0.25
 export PORT=9000
-
-wget https://dl.minio.io/client/mc/release/linux-amd64/mc
-chmod 775 mc
 
 ./mc config host add minio-4node-200g-c01 http://${POD_IP}:${PORT} \
   vertica_eon_k1234567 vertica_eon_k1234567_secret1234567890123 S3v4

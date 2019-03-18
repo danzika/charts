@@ -5,12 +5,15 @@ export NAMESPACE=minio
 helm del --purge minio-4node-200g-c01
 helm del --purge minio-4node-200g-c02
 
+###################################
 # If corrupted
 helm list --namespace ${NAMESPACE}
 kubectl get all --namespace ${NAMESPACE} -l release=minio-4node-200g-c01
 
 kubectl delete pods,services,secrets,configmaps,persistentvolumeclaims,statefulsets.apps --namespace ${NAMESPACE} -l release=minio-4node-200g-c01
 kubectl delete persistentvolumes --namespace ${NAMESPACE} -l app=minio
+# If corrupted
+###################################
 
 kubectl delete pvc export-minio-4node-200g-c01-0 --namespace ${NAMESPACE}
 kubectl delete pvc export-minio-4node-200g-c01-1 --namespace ${NAMESPACE}
