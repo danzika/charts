@@ -15,8 +15,9 @@ MINIO_CLUSTER="$1"
 if [[ "$2" == "heal" ]]; then
     COMMAND="mc admin heal -r $MINIO_CLUSTER/vertica"
 elif [[ "$2" == "rm_corrupted" ]]; then
-    GET_CORRUPTED="mc ls -r $MINIO_CLUSTER | grep 'CORRUPTED'"
-    COMMAND="${GET_CORRUPTED} | sed -r 's/.*(vertica.*CORRUPTED).*/${MINIO_CLUSTER}\\/\\1/' | xargs mc ls"
+    PATTERN="gt"
+    GET_CORRUPTED="mc ls -r $MINIO_CLUSTER | grep '${PATTERN}' | head -1"
+    COMMAND="${GET_CORRUPTED} | sed -r 's/.*(vertica.*${PATTERN}).*/${MINIO_CLUSTER}\\/\\1/' | xargs mc ls"
 else
     echo "ERROR: Unsupported command: $2"
     exit
