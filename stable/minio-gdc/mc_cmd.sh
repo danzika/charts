@@ -2,8 +2,8 @@
 
 if [[ -z "$2" ]]; then
     echo "Usage: $0 <minio-cluster> <command> [akey] [skey] [node]"
-    echo "  example command: 'mc admin heal -r \$MINIO_CLUSTER/vertica'"
-    echo "  if you specify node (k8s worker node), only pods on the node are healed"
+    echo "  example command: 'mc admin heal -r \$MINIO_CLUSTER/vertica'."
+    echo "  if you specify node (k8s worker node), only pods on the node are healed."
     exit 1
 fi
 
