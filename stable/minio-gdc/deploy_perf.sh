@@ -2,9 +2,13 @@
 
 export NAMESPACE=minio
 
+ssh mgmt-performance
+
 clusterExec.py -m perf-k8s-worker{01..08} -- 'sudo mkdir -p /mnt/minio1'
 
 kubectl create --namespace ${NAMESPACE} -f gdc-pv-perf.yaml
+
+ssh perf-k8s-master01
 
 helm install ../minio/ --name minio-4node-200g-c01 --namespace ${NAMESPACE} -f minio-4node-200g-c01.yaml
 helm install ../minio/ --name minio-4node-200g-c02 --namespace ${NAMESPACE} -f minio-4node-200g-c02.yaml
