@@ -31,6 +31,11 @@ export PORT=9000
 ./mc admin heal --recursive --dry-run minio-4node-200g-c01/vertica
 ./mc admin heal --recursive minio-4node-200g-c01/vertica
 
+# Check for latest version of Minio
+curl -s https://api.github.com/repos/minio/minio/releases/latest | jq '.tag_name'
+
+
+#################################################################
 # Explore / modify ETCD records
 export ETCDCTL_API=3
 etcdctl --endpoints perf-k8s-master01.int.na.prodgdc.com:2379 get --prefix /skydns

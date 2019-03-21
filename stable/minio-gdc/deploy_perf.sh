@@ -13,7 +13,12 @@ kubectl apply -f custom_ingress_nginx.yaml -n ${NAMESPACE}
 
 kubectl get all --namespace ${NAMESPACE} -l release=minio-4node-200g-c01
 
+# Update
+helm upgrade minio-4node-200g-c01 ../minio/ --namespace ${NAMESPACE} -f minio-4node-200g-c01.yaml
+helm upgrade minio-4node-200g-c02 ../minio/ --namespace ${NAMESPACE} -f minio-4node-200g-c02.yaml
+
 #####################################################################################################
+# Various tests, current deployment way is above
 
 export NODE_PORT=32080
 export SERVICE_PORT=9000
