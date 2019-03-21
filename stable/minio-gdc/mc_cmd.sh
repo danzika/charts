@@ -40,7 +40,8 @@ fi
 echo "GET PODS: release=${MINIO_CLUSTER}, NODE=\"${NODE}\" ..."
 for POD in $(kubectl get pods --no-headers --namespace minio -l release=${MINIO_CLUSTER} -o wide | grep -iE "${NODE}" | awk '{print $1}' | sort)
 do
+    echo "Exec command on POD ${POD} ..."
     MC_GET="curl ${MC_URL} > ${MC_FILE} 2>/dev/null 3>&2 && chmod 775 ${MC_FILE}"
     MC_CONFIG="mc config host add $MINIO_CLUSTER http://127.0.0.1:9000 $MINIO_USER $MINIO_SECRET S3v4"
-    kubectl exec -it --namespace=minio ${POD} -- sh -c "hostname && ${MC_GET} && ${MC_CONFIG} && ${COMMAND}"
+    kubectl exec -it --namespace=minio ${POD} -- sh -c "${MC_GET} && ${MC_CONFIG} && ${COMMAND}"
 done;
