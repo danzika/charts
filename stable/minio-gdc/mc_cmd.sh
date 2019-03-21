@@ -3,7 +3,7 @@
 if [[ -z "$2" ]]; then
     echo ""
     echo "Usage: $0 <minio-cluster> <command> [node] [akey] [skey]"
-    echo "  supported commands: (heal)"
+    echo "  supported commands: (heal|rm_corrupted)"
     echo "  if you specify node (k8s worker node), only pods on the node are healed."
     exit 1
 fi
@@ -14,6 +14,9 @@ MC_URL=https://dl.minio.io/client/mc/release/linux-amd64/mc
 MINIO_CLUSTER="$1"
 if [[ "$2" == "heal" ]]; then
     COMMAND="mc admin heal -r $MINIO_CLUSTER/vertica"
+elif [[ "$2" == "rm_corrupted" ]]; then
+    GET_CORRUPTED="mc ls -r $MINIO_CLUSTER | grep 'CORRUPTED'"
+    COMMAND="${GET_CORRUPTED} | sed -r 's/.*(vertica.*CORRUPTED).*/${MINIO_CLUSTER}\\/\\1/' | xargs mc ls"
 else
     echo "ERROR: Unsupported command: $2"
     exit
