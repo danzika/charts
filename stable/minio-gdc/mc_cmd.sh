@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
 if [[ -z "$2" ]]; then
-    echo "Usage: $0 <minio-cluster> <command> [akey] [skey] [node]"
-    echo "  example command: 'mc admin heal -r \$MINIO_CLUSTER/vertica'."
+    echo ""
+    echo "Usage: $0 <minio-cluster> <command> [node] [akey] [skey]"
+    echo "  example command: 'admin heal -r \$MINIO_CLUSTER/vertica'."
     echo "  if you specify node (k8s worker node), only pods on the node are healed."
     exit 1
 fi
@@ -11,21 +12,26 @@ MC_FILE=/usr/local/bin/mc
 MC_URL=https://dl.minio.io/client/mc/release/linux-amd64/mc
 
 MINIO_CLUSTER="$1"
-COMMAND="$2"
+if [[ "$2" == "heal" ]]; then
+    COMMAND="mc admin heal -r $MINIO_CLUSTER/vertica"
+else
+    echo "ERROR: Unsupported command: $2"
+    exit
+fi
 if [[ -z "$3" ]]; then
-    MINIO_USER=vertica_eon_k1234567
-else
-    MINIO_USER="$3"
-fi
-if [[ -z "$4" ]]; then
-    MINIO_SECRET=vertica_eon_k1234567_secret1234567890123
-else
-    MINIO_SECRET="$4"
-fi
-if [[ -z "$5" ]]; then
     NODE=".*"
 else
-    NODE="$5"
+    NODE="$3"
+fi
+if [[ -z "$4" ]]; then
+    MINIO_USER=vertica_eon_k1234567
+else
+    MINIO_USER="$4"
+fi
+if [[ -z "$5" ]]; then
+    MINIO_SECRET=vertica_eon_k1234567_secret1234567890123
+else
+    MINIO_SECRET="$5"
 fi
 
 
