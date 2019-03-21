@@ -37,7 +37,7 @@ else
     MINIO_SECRET="$5"
 fi
 
-
+echo "GET PODS: release=${MINIO_CLUSTER}, NODE=\"${NODE}\" ..."
 for POD in $(kubectl get pods --no-headers --namespace minio -l release=${MINIO_CLUSTER} -o wide | grep -iE "${NODE}" | awk '{print $1}' | sort)
 do
     MC_GET="curl ${MC_URL} > ${MC_FILE} 2>/dev/null 3>&2 && chmod 775 ${MC_FILE}"
