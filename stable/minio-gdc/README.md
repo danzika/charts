@@ -56,12 +56,17 @@ Destroy scripts
 - persistent volume claim and related volumes must be deleted manually
 - delete plugin for local-storage has not been implemented yet
 
-Admin script
+Admin scripts
 ------------
 
+admin.sh:
 - how to use MC tool to administrate Minio clusters
 - mirror example
 - how to manage ETCD, if federation is used
+
+mc_cmd.sh
+- heal minio
+- rm corrupted files (should be obsolete now)
 
 Other
 -----
