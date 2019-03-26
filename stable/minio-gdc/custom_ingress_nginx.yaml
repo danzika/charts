@@ -15,9 +15,23 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: minio-4node-200g-c02
+          serviceName: minio-4node-200g-c01
           servicePort: 9000
   - host: perf-dss-v04.minio.k8s.gooddata
+    http:
+      paths:
+        - path: /
+          backend:
+            serviceName: minio-4node-200g-c02
+            servicePort: 9000
+  - host: perf-dss-v05.minio.k8s.gooddata
+    http:
+      paths:
+        - path: /
+          backend:
+            serviceName: minio-4node-200g-c01
+            servicePort: 9000
+  - host: perf-dss-v06.minio.k8s.gooddata
     http:
       paths:
         - path: /
