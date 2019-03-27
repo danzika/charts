@@ -200,6 +200,7 @@ nasgateway:
 environment:
   ## To disable Minio Browser, set this value to off
   MINIO_BROWSER: "on"
+  # MINIO_HTTP_TRACE=/path/to/log.file
   ## To enable virtual-host-style requests, set this value to Minio host domain name.
   # MINIO_DOMAIN: ""
   ## Minio Cache settings, refer: https://docs.minio.io/docs/minio-disk-cache-guide.html
