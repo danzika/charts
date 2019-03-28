@@ -6,9 +6,6 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
     nginx.ingress.kubernetes.io/proxy-buffering: "off"
     nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
-    prometheus.io/scrape: 'true'
-    prometheus.io/path:   '/minio/prometheus/metrics'
-    prometheus.io/port:   '9000'
   name: minio-clusters
   namespace: minio
 spec:
