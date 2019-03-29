@@ -44,10 +44,10 @@ configPath: "/root/.minio/"
 mountPath: "/data"
 replicas: 4
 
-#podAnnotations:
-#  prometheus.io/scrape: 'true'
-#  prometheus.io/path:   '/minio/prometheus/metrics'
-#  prometheus.io/port:   '9000'
+podAnnotations:
+  prometheus.io/scrape: 'true'
+  prometheus.io/path:   '/minio/prometheus/metrics'
+  prometheus.io/port:   '9000'
 
 ## TLS Settings for Minio
 tls:
@@ -99,10 +99,10 @@ service:
   nodePort: 32080
   # externalIPs:
   #   - externalIp1
-  annotations:
-    prometheus.io/scrape: 'true'
-    prometheus.io/path:   '/minio/prometheus/metrics'
-    prometheus.io/port:   '9000'
+  annotations: {}
+#    prometheus.io/scrape: 'true'
+#    prometheus.io/path:   '/minio/prometheus/metrics'
+#    prometheus.io/port:   '9000'
 
 ingress:
   enabled: false
@@ -111,9 +111,9 @@ ingress:
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
     nginx.ingress.kubernetes.io/proxy-buffering: "off"
     nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
-    prometheus.io/scrape: 'true'
-    prometheus.io/path:   '/minio/prometheus/metrics'
-    prometheus.io/port:   '9000'
+#    prometheus.io/scrape: 'true'
+#    prometheus.io/path:   '/minio/prometheus/metrics'
+#    prometheus.io/port:   '9000'
     # kubernetes.io/tls-acme: "true"
   path: /
   hosts:
