@@ -44,10 +44,10 @@ configPath: "/root/.minio/"
 mountPath: "/data"
 replicas: 4
 
-podAnnotations:
-  prometheus.io/scrape: 'true'
-  prometheus.io/path:   '/minio/prometheus/metrics'
-  prometheus.io/port:   '9000'
+#podAnnotations:
+#  prometheus.io/scrape: 'true'
+#  prometheus.io/path:   '/minio/prometheus/metrics'
+#  prometheus.io/port:   '9000'
 
 ## TLS Settings for Minio
 tls:
