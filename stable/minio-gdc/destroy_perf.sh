@@ -4,6 +4,7 @@ export NAMESPACE=minio
 
 helm del --purge minio-4node-200g-c01
 helm del --purge minio-4node-200g-c02
+kubectl delete -f custom_ingress_nginx.yaml -n ${NAMESPACE}
 
 ###################################
 # If corrupted

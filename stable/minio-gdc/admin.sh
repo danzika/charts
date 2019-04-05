@@ -10,7 +10,7 @@ kubectl get all --namespace ${NAMESPACE} -l release=minio-4node-200g-c01
 
 kubectl describe svc minio-4node-200g-c01 --namespace minio | grep Endpoints:
 
-export POD_IP=172.17.0.25
+export POD_IP=172.16.64.28
 export PORT=9000
 
 ./mc config host add minio-4node-200g-c01 http://${POD_IP}:${PORT} \
